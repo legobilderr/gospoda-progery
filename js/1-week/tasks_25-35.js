@@ -94,8 +94,17 @@
     let message;
     // Пиши код ниже этой строки
     switch (country) {
-      case "":
-        message = `Доставка в ... будет стоить 100 кредитов`;
+      case "Китай":
+        message = `Доставка в ${country} будет стоить 100 кредитов`;
+        break;
+      case "Чили":
+        message = `Доставка в ${country} будет стоить 200 кредитов`;
+        break;
+      case "Ямайка":
+        message = `Доставка в ${country} будет стоить 300 кредитов`;
+        break;
+      case "Австралия":
+        message = `Доставка в ${country} будет стоить 400 кредитов`;
         break;
       default:
         message = "Извините, в вашу страну доставки нет";
@@ -116,7 +125,7 @@
 // Функция должна возвращать message.
 {
   function getNameLength(name) {
-    const message = `Длина вашего имени ... символа(ов)`; // Дополни эту строку
+    const message = `Длина вашего имени ${name.length} символа(ов)`; // Дополни эту строку
 
     return message;
   }
@@ -133,9 +142,9 @@
   const courseTopic = "JavaSсript для профессионалов";
   // Пиши код ниже этой строки
 
-  const courseTopicLength = undefined;
-  const firstElement = undefined;
-  const lastElement = undefined;
+  const courseTopicLength = courseTopic.length;
+  const firstElement = courseTopic[0];
+  const lastElement = courseTopic[courseTopic.length - 1];
 
   // Пиши код выше этой строки
 
@@ -148,7 +157,7 @@
 // Функция должна возвращать substring.
 {
   function getSubstring(string, length) {
-    const substring = undefined; // Дополни эту строку
+    const substring = string.substring(0, length); // Дополни эту строку
 
     return substring;
   }
@@ -167,10 +176,10 @@
   function formatMessage(message, maxLength) {
     let result;
     // Пиши код ниже этой строки
-    if (1) {
-      result = undefined;
+    if (message.length <= maxLength) {
+      result = message;
     } else {
-      result = undefined;
+      result = message.substring(0, maxLength) + "...";
     }
     // Пиши код выше этой строки
     return result;
@@ -190,7 +199,7 @@
 // Функция возвращает строку в нижнем регистре.
 {
   function normalizeInput(input) {
-    const normalizedInput = input; // Дополни эту строку
+    const normalizedInput = input.toLowerCase(); // Дополни эту строку
     return normalizedInput;
   }
 
@@ -203,7 +212,7 @@
 // Возвращает логическое значение.
 {
   function checkForName(fullName, name) {
-    const result = fullName; // Дополни эту строку
+    const result = fullName.includes(name); // Дополни эту строку
     return result;
   }
 
@@ -220,7 +229,7 @@
   function checkForSpam(message) {
     let result;
     // Пиши код ниже этой строки
-    if (1) {
+    if (message.includes("spam") || message.includes("sale")) {
       result = true;
     } else {
       result = false;
