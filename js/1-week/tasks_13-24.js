@@ -231,14 +231,15 @@
     const GOLD_DISCOUNT = 0.1;
     let discount;
     // Пиши код ниже этой строки
-    if (totalSpent >= 50000) {
-      discount = GOLD_DISCOUNT;
-    } else if (totalSpent >= 20000) {
-      discount = SILVER_DISCOUNT;
-    } else if (totalSpent >= 5000) {
-      discount = BRONZE_DISCOUNT;
-    } else {
+    console.log(5000 <= totalSpent && totalSpent < 20000);
+    if (totalSpent < 5000) {
       discount = BASE_DISCOUNT;
+    } else if (5000 <= totalSpent && totalSpent < 20000) {
+      discount = BRONZE_DISCOUNT;
+    } else if (20000 <= totalSpent && totalSpent < 50000) {
+      discount = SILVER_DISCOUNT;
+    } else {
+      discount = GOLD_DISCOUNT;
     }
     // Пиши код выше этой строки
     return discount;
