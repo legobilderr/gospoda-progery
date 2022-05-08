@@ -4,15 +4,20 @@
 // Функция должна возвращать isMatch.
 {
   function isValidPassword(password) {
-    const SAVED_PASSWORD = 'jqueryismyjam';
+    const SAVED_PASSWORD = "jqueryismyjam";
     // Пиши код ниже этой строки
-    const isMatch = undefined;
-    return;
+    let isMatch = undefined;
+    if (password === SAVED_PASSWORD) {
+      isMatch = true;
+    } else {
+      isMatch = undefined;
+    }
+    return isMatch;
     // Пиши код выше этой строки
   }
 
-  console.log('Task 13: ', isValidPassword('jqueryismyjam'));
-  console.log('Task 13: ', isValidPassword('jsisawesome'));
+  console.log("Task 13: ", isValidPassword("jqueryismyjam"));
+  console.log("Task 13: ", isValidPassword("jsisawesome"));
 }
 
 /* *** Task 14 *** */
@@ -24,17 +29,17 @@
   function checkAge(age) {
     let message;
 
-    /* исправь эту строку */ if (18) {
-      message = 'Вы совершеннолетний человек';
+    /* исправь эту строку */ if (18 <= age) {
+      message = "Вы совершеннолетний человек";
     } else {
-      message = 'Вы не совершеннолетний человек';
+      message = "Вы не совершеннолетний человек";
     }
 
     return message;
   }
 
-  console.log('Task 14: ', checkAge(19));
-  console.log('Task 14: ', checkAge(11));
+  console.log("Task 14: ", checkAge(19));
+  console.log("Task 14: ", checkAge(11));
 }
 
 /* *** Task 15 *** */
@@ -46,17 +51,17 @@
   function checkStorage(available, ordered) {
     let message;
     // Пиши код ниже этой строки
-    if (1) {
-      message = '';
+    if (ordered > available) {
+      message = "На складе недостаточно товаров!";
     } else {
-      message = '';
+      message = "Заказ оформлен, с вами свяжется менеджер";
     }
     // Пиши код выше этой строки
     return message;
   }
 
-  console.log('Task 15: ', checkStorage(19, 20));
-  console.log('Task 15: ', checkStorage(11, 7));
+  console.log("Task 15: ", checkStorage(19, 20));
+  console.log("Task 15: ", checkStorage(11, 7));
 }
 
 /* *** Task 16 *** */
@@ -68,15 +73,20 @@
   let c = 15;
   let d = 20;
 
+  a += 2;
+  b -= 4;
+  c *= 3;
+  d /= 10;
+
   // Example a += 8
   // Пиши код ниже этой строки
 
   // Пиши код выше этой строки
 
-  console.log('a: ', a);
-  console.log('b: ', b);
-  console.log('c: ', c);
-  console.log('d: ', d);
+  console.log("a: ", a);
+  console.log("b: ", b);
+  console.log("c: ", c);
+  console.log("d: ", d);
 }
 
 /* *** Task 17 *** */
@@ -90,46 +100,48 @@
   function makeTransaction(pricePerDrone, orderedQuantity, customerCredits) {
     let message;
     // Пиши код ниже этой строки
-    let totalPrice = undefined;
-    if (1) {
-      message = 'Недостаточно средств на счету!';
+    let totalPrice = orderedQuantity * pricePerDrone;
+    if (totalPrice > customerCredits) {
+      message = "Недостаточно средств на счету!";
     } else {
-      message = `Вы купили ... дронов, на счету осталось ... кредитов`;
+      message = `Вы купили ${orderedQuantity} дронов, на счету осталось ${
+        customerCredits - totalPrice
+      } кредитов`;
     }
     // Пиши код выше этой строки
     return message;
   }
 
-  console.log('Task 17: ', makeTransaction(11, 5, 200));
-  console.log('Task 17: ', makeTransaction(7, 10, 50));
+  console.log("Task 17: ", makeTransaction(11, 5, 200));
+  console.log("Task 17: ", makeTransaction(7, 10, 50));
 }
 
 /* *** Task 18 *** */
 // Дописать функцию checkPassword,
-// Вычислить значение totalPrice. При условии если totalPrice больше customerCredits
-// выводится сообщение 'Недостаточно средств на счету!'. В противном случае
-// с помощью шаблонной строки `${}` выведите информацию о количестве купленных дронов
-// и остатке на счету.
+// если password равен null, присвоить переменной message 'Отменено пользователем!'.
+// Если строка password равна ADMIN_PASSWORD, присвоить переменной message 'Добро пожаловать!'.
+// В противном случае 'Доступ запрещен, неверный пароль!'.
 // Функция должна возвращать message.
 {
   function checkPassword(password) {
-    const ADMIN_PASSWORD = 'jqueryismyjam';
+    const ADMIN_PASSWORD = "jqueryismyjam";
     let message;
 
-    /* Дополни эту строку */ if (password) {
-      message = 'Отменено пользователем!';
+    /* Дополни эту строку */ if (password === null) {
+      message = "Отменено пользователем!";
       /* Дополни строку ниже*/
-    } else if (password) {
-      message = 'Добро пожаловать!';
+    } else if (password === ADMIN_PASSWORD) {
+      message = "Добро пожаловать!";
     } else {
-      message = 'Доступ запрещен, неверный пароль!';
+      message = "Доступ запрещен, неверный пароль!";
     }
 
     return message;
   }
 
-  console.log('Task 18: ', checkPassword(11, 5, 200));
-  console.log('Task 18: ', checkPassword(7, 10, 50));
+  console.log("Task 18: ", checkPassword(null));
+  console.log("Task 18: ", checkPassword("jqueryismyjam"));
+  console.log("Task 18: ", checkPassword("jsismyjam"));
 }
 
 /* *** Task 19 *** */
@@ -141,20 +153,20 @@
   function checkStorage(available, ordered) {
     let message;
     // Пиши код ниже этой строки
-    if (1) {
-      message = 'В заказе еще нет товаров';
-    } else if (2) {
-      message = 'Слишком большой заказ, на складе недостаточно товаров!';
+    if (ordered === 0) {
+      message = "В заказе еще нет товаров";
+    } else if (available < ordered) {
+      message = "Слишком большой заказ, на складе недостаточно товаров!";
     } else {
-      message = 'Заказ оформлен, с вами свяжется менеджер';
+      message = "Заказ оформлен, с вами свяжется менеджер";
     }
     // Пиши код выше этой строки
     return message;
   }
 
-  console.log('Task 19: ', checkStorage(5, 0));
-  console.log('Task 19: ', checkStorage(11, 5));
-  console.log('Task 19: ', checkStorage(7, 10));
+  console.log("Task 19: ", checkStorage(5, 0));
+  console.log("Task 19: ", checkStorage(11, 5));
+  console.log("Task 19: ", checkStorage(7, 10));
 }
 
 /* *** Task 20 *** */
@@ -163,14 +175,13 @@
 // Функция должна возвращать isInRange.
 {
   function isNumberInRange(start, end, number) {
-    const isInRange = undefined; // дополни эту строку
-
+    const isInRange = number >= start && number <= end; // дополни эту строку
     return isInRange;
   }
 
-  console.log('Task 20: ', isNumberInRange(11, 20, 5));
-  console.log('Task 20: ', isNumberInRange(11, 30, 21));
-  console.log('Task 20: ', isNumberInRange(11, 40, 100));
+  console.log("Task 20: ", isNumberInRange(11, 20, 5));
+  console.log("Task 20: ", isNumberInRange(11, 30, 21));
+  console.log("Task 20: ", isNumberInRange(11, 40, 100));
 }
 
 /* *** Task 21 *** */
@@ -179,14 +190,14 @@
 // Функция должна возвращать canAccessContent.
 {
   function checkIfCanAccessContent(subType) {
-    const canAccessContent = undefined; // дополни эту строку
+    const canAccessContent = subType === "pro" || subType === "vip"; // дополни эту строку
 
-    return;
+    return canAccessContent;
   }
 
-  console.log('Task 21: ', checkIfCanAccessContent('basic'));
-  console.log('Task 21: ', checkIfCanAccessContent('pro'));
-  console.log('Task 21: ', checkIfCanAccessContent('vip'));
+  console.log("Task 21: ", checkIfCanAccessContent("basic"));
+  console.log("Task 21: ", checkIfCanAccessContent("pro"));
+  console.log("Task 21: ", checkIfCanAccessContent("vip"));
 }
 
 /* *** Task 22 *** */
@@ -196,14 +207,14 @@
 {
   function isNumberNotInRange(start, end, number) {
     const isInRange = number >= start && number <= end;
-    const isNotInRange = isInRange; // Дополни эту строку
+    const isNotInRange = !isInRange; // Дополни эту строку
 
     return isNotInRange;
   }
 
-  console.log('Task 22: ', isNumberNotInRange(11, 22, 5));
-  console.log('Task 22: ', isNumberNotInRange(11, 30, 21));
-  console.log('Task 22: ', isNumberNotInRange(11, 40, 100));
+  console.log("Task 22: ", isNumberNotInRange(11, 22, 5));
+  console.log("Task 22: ", isNumberNotInRange(11, 30, 21));
+  console.log("Task 22: ", isNumberNotInRange(11, 40, 100));
 }
 
 /* *** Task 23 *** */
@@ -220,11 +231,11 @@
     const GOLD_DISCOUNT = 0.1;
     let discount;
     // Пиши код ниже этой строки
-    if (1) {
+    if (totalSpent >= 50000) {
       discount = GOLD_DISCOUNT;
-    } else if (2) {
+    } else if (totalSpent >= 20000) {
       discount = SILVER_DISCOUNT;
-    } else if (3) {
+    } else if (totalSpent >= 5000) {
       discount = BRONZE_DISCOUNT;
     } else {
       discount = BASE_DISCOUNT;
@@ -233,10 +244,10 @@
     return discount;
   }
 
-  console.log('Task 23: ', getDiscount(55000));
-  console.log('Task 23: ', getDiscount(30000));
-  console.log('Task 23: ', getDiscount(1000));
-  console.log('Task 23: ', getDiscount(6000));
+  console.log("Task 23: ", getDiscount(55000));
+  console.log("Task 23: ", getDiscount(30000));
+  console.log("Task 23: ", getDiscount(1000));
+  console.log("Task 23: ", getDiscount(6000));
 }
 
 /* *** Task 24 *** */
@@ -248,11 +259,13 @@
   function checkStorage(available, ordered) {
     let message;
     // Пиши код ниже этой строки
-    message = undefined;
+    available < ordered
+      ? (message = "На складе недостаточно товаров!")
+      : (message = "Заказ оформлен, с вами свяжется менеджер");
     // Пиши код выше этой строки
     return message;
   }
 
-  console.log('Task 24: ', checkStorage(55, 11));
-  console.log('Task 24: ', checkStorage(3, 10));
+  console.log("Task 24: ", checkStorage(55, 11));
+  console.log("Task 24: ", checkStorage(3, 10));
 }
