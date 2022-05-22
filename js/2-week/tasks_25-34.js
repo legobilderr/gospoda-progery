@@ -6,13 +6,13 @@
 // const a = _ % 5; // 4
 // вместо _ пишем 9
 {
-  // const a = 3 % _; // 0
-  // const b = _ % 3; // 1
-  // const c = 11 % _; // 3
-  // const d = _ % 7; // 5
-  // const e = 8 % _; // 2
-  // const f = _ % 9; // 4
-  // console.log('Task 25: ', a, b, c, d, e, f);
+  const a = 3 % 3; // 0
+  const b = 4 % 3; // 1
+  const c = 11 % 3; // 3
+  const d = 12 % 7; // 5
+  const e = 8 % 3; // 2
+  const f = 13 % 9; // 4
+  console.log("Task 25: ", a, b, c, d, e, f);
 }
 
 /* *** Task 26 *** */
@@ -24,14 +24,17 @@
   function getEvenNumbers(start, end) {
     const arr = [];
     // Пиши код ниже этой строки
+    for (i = start; i <= end; i++) {
+      i % 2 === 0 ? arr.push(i) : "";
+    }
 
     // Пиши код выше этой строки
     return arr;
   }
 
-  console.log('Task 26: ', getEvenNumbers(1, 10)); // [ 2, 4, 6, 8, 10 ]
-  console.log('Task 26: ', getEvenNumbers(13, 21)); // [ 14, 16, 18, 20 ]
-  console.log('Task 26: ', getEvenNumbers(105, 109)); //[ 106, 108 ]
+  console.log("Task 26: ", getEvenNumbers(1, 10)); // [ 2, 4, 6, 8, 10 ]
+  console.log("Task 26: ", getEvenNumbers(13, 21)); // [ 14, 16, 18, 20 ]
+  console.log("Task 26: ", getEvenNumbers(105, 109)); //[ 106, 108 ]
 }
 
 /* *** Task 27 *** */
@@ -42,7 +45,14 @@
   const end = 27;
   let number;
 
-  console.log('Task 27: ', number); // 10
+  for (i = start; i <= end; i++) {
+    if (i % 5 === 0) {
+      number = i;
+      break;
+    }
+  }
+
+  console.log("Task 27: ", number); // 10
 }
 
 /* *** Task 28 *** */
@@ -52,7 +62,13 @@
   const end = 31;
   let number;
 
-  console.log('Task 28: ', number); // 28
+  for (i = start; i <= end; i++) {
+    if ((i % 7 === 0 && number < i) || number === undefined) {
+      number = i;
+    }
+  }
+
+  console.log("Task 28: ", number); // 28
 }
 
 /* *** Task 29 *** */
@@ -64,11 +80,17 @@
 {
   function findNumber(start, end, divisor) {
     // Пиши код ниже этой строки
+
+    for (i = start; i <= end; i++) {
+      if (i % divisor === 0) {
+        return i;
+      }
+    }
     // Пиши код выше этой строки
   }
 
-  console.log('Task 29: ', findNumber(4, 10, 3)); // 6
-  console.log('Task 29: ', findNumber(6, 14, 5)); // 10
+  console.log("Task 29: ", findNumber(4, 10, 3)); // 6
+  console.log("Task 29: ", findNumber(6, 14, 5)); // 10
 }
 
 /* *** Task 30 *** */
@@ -81,8 +103,8 @@
     return array.indexOf(value) !== -1 ? true : false;
   }
 
-  console.log('Task 30: ', includes([4, 3, 2, 5, 17, 10], 3)); // true
-  console.log('Task 30: ', includes([6, 14], 5)); // false
+  console.log("Task 30: ", includes([4, 3, 2, 5, 17, 10], 3)); // true
+  console.log("Task 30: ", includes([6, 14], 5)); // false
 }
 
 /* *** Task 31 - 34 *** */
@@ -92,11 +114,45 @@
 // Функция должна возвращать логическое значение true/false,
 // отвечая на вопрос содержит ли массив array переданное значение value.
 {
+  // function includes(array, value) {
+  //   // Пиши код ниже этой строки
+  //   for (let item of array) {
+  //     if (item === value) {
+  //       return true;
+  //     }
+  //   }
+  //   return false;
+  // }
+
+  // function includes(array, value) {
+  //   // Пиши код ниже этой строки
+  //   let answer = false;
+  //   array.map((mapValue) => {
+  //     if (mapValue === value) {
+  //       answer = true;
+  //     }
+  //   });
+  //   return answer;
+  // }
+
+  // function includes(array, value) {
+  //   // Пиши код ниже этой строки
+  //   answer = array.find((element) => element === value);
+  //   if (answer) {
+  //     return true;
+  //   }
+  //   return false;
+  // }
+
   function includes(array, value) {
     // Пиши код ниже этой строки
-    return;
+    answer = array.filter((element) => element === value);
+    if (answer.length > 0) {
+      return true;
+    }
+    return false;
   }
 
-  console.log('Task 31: ', includes([4, 3, 2, 5, 17, 10], 3)); // true
-  console.log('Task 31: ', includes([6, 14], 5)); // false
+  console.log("Task 31: ", includes([4, 3, 2, 5, 17, 10], 3)); // true
+  console.log("Task 31: ", includes([6, 14], 5)); // false
 }
