@@ -125,7 +125,7 @@
     let string;
     // Пиши код ниже этой строки
 
-    return array.join(" ");
+    return array.join(delimeter);
     // Пиши код выше этой строки
   }
 
