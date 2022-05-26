@@ -5,27 +5,31 @@
 {
   function countProps(object) {
     // Пиши код ниже этой строки
-    return;
+    return Object.keys(object).length;
     // Пиши код выше этой строки
   }
 
-  console.log('Task 13: ', countProps({ name: 'asd', surname: 'asdasd', age: 5 }));
-  console.log('Task 13: ', countProps({}));
+  console.log(
+    "Task 13: ",
+    countProps({ name: "asd", surname: "asdasd", age: 5 })
+  );
+  console.log("Task 13: ", countProps({}));
 }
 
 /* *** Task 14 *** */
 // firstObjectValue присвоить значение первого ключа в объекте apartment, lastObjectKey - последнего.
 {
   const apartment = {
-    descr: 'Просторная квартира в центре',
+    descr: "Просторная квартира в центре",
     rating: 4,
     price: 2153,
   };
   // Пиши код ниже этой строки
-  const lastObjectKey = undefined;
-  const firstObjectValue = undefined;
+  const lastObjectKey = Object.keys(apartment)[0];
+  const firstObjectValue =
+    Object.keys(apartment)[Object.keys(apartment).length - 1];
 
-  console.log('Task 14: ', firstObjectValue, lastObjectKey);
+  console.log("Task 14: ", firstObjectValue, lastObjectKey);
 }
 
 /* *** Task 15 *** */
@@ -35,13 +39,18 @@
   function countTotalSalary(salaries) {
     let totalSalary = 0;
     // Пиши код ниже этой строки
-
+    for (values of Object.values(salaries)) {
+      totalSalary += values;
+    }
     // Пиши код выше этой строки
     return totalSalary;
   }
 
-  console.log('Task 15: ', countTotalSalary({ first: 300, second: 400, third: 700, fourth: 550 }));
-  console.log('Task 15: ', countTotalSalary([300, 400, 250]));
+  console.log(
+    "Task 15: ",
+    countTotalSalary({ first: 300, second: 400, third: 700, fourth: 550 })
+  );
+  console.log("Task 15: ", countTotalSalary([300, 400, 250]));
 }
 
 /* *** Task 16 *** */
@@ -50,16 +59,21 @@
 // в массив rgbColors - цвета rgb.
 {
   const colors = [
-    { hex: '#f44336', rgb: '244,67,54' },
-    { hex: '#2196f3', rgb: '33,150,243' },
-    { hex: '#4caf50', rgb: '76,175,80' },
-    { hex: '#ffeb3b', rgb: '255,235,59' },
+    { hex: "#f44336", rgb: "244,67,54" },
+    { hex: "#2196f3", rgb: "33,150,243" },
+    { hex: "#4caf50", rgb: "76,175,80" },
+    { hex: "#ffeb3b", rgb: "255,235,59" },
   ];
   const hexColors = [];
   const rgbColors = [];
   // Пиши код ниже этой строки
 
-  console.log('Task 16: ', hexColors, rgbColors);
+  for (color of colors) {
+    hexColors.push(color.hex);
+    rgbColors.push(color.rgb);
+  }
+
+  console.log("Task 16: ", hexColors, rgbColors);
 }
 
 /* *** Task 17 *** */
@@ -68,19 +82,25 @@
 // если ничего не найдено, возвращает null
 {
   const products = [
-    { name: 'Радар', price: 1300, quantity: 4 },
-    { name: 'Сканер', price: 2700, quantity: 3 },
-    { name: 'Дрон', price: 400, quantity: 7 },
-    { name: 'Принтер', price: 1200, quantity: 9 },
+    { name: "Радар", price: 1300, quantity: 4 },
+    { name: "Сканер", price: 2700, quantity: 3 },
+    { name: "Дрон", price: 400, quantity: 7 },
+    { name: "Принтер", price: 1200, quantity: 9 },
   ];
 
   function getProductPrice(productName) {
     // Пиши код здесь
+    for (product of products) {
+      if (product.name === productName) {
+        return product.price;
+      }
+    }
+    return null;
   }
 
-  console.log('Task 17: ', getProductPrice('Радар')); // 1300
-  console.log('Task 17: ', getProductPrice('Принтер')); // 1200
-  console.log('Task 17: ', getProductPrice('Банан')); // null
+  console.log("Task 17: ", getProductPrice("Радар")); // 1300
+  console.log("Task 17: ", getProductPrice("Принтер")); // 1200
+  console.log("Task 17: ", getProductPrice("Банан")); // null
 }
 
 /* *** Task 18 *** */
@@ -90,20 +110,27 @@
 // Если такого поля в объектах products нет, то возвращает пустой массив.
 {
   const products = [
-    { name: 'Радар', price: 1300, quantity: 4 },
-    { name: 'Сканер', price: 2700, quantity: 3 },
-    { name: 'Дрон', price: 400, quantity: 7 },
-    { name: 'Принтер', price: 1200, quantity: 9 },
+    { name: "Радар", price: 1300, quantity: 4 },
+    { name: "Сканер", price: 2700, quantity: 3 },
+    { name: "Дрон", price: 400, quantity: 7 },
+    { name: "Принтер", price: 1200, quantity: 9 },
   ];
 
   function getAllPropValues(propName) {
     // Пиши код здесь
+    let answer = [];
+    for (product of products) {
+      if (product[propName]) {
+        answer.push(product[propName]);
+      }
+    }
+    return answer;
   }
 
-  console.log('Task 18: ', getAllPropValues('name')); // [ 'Радар', 'Сканер', 'Дрон', 'Принтер' ]
-  console.log('Task 18: ', getAllPropValues('price')); // [ 1300, 2700, 400, 1200 ]
-  console.log('Task 18: ', getAllPropValues('quantity')); // [ 4, 3, 7, 9 ]
-  console.log('Task 18: ', getAllPropValues('available')); // [ ]
+  console.log("Task 18: ", getAllPropValues("name")); // [ 'Радар', 'Сканер', 'Дрон', 'Принтер' ]
+  console.log("Task 18: ", getAllPropValues("price")); // [ 1300, 2700, 400, 1200 ]
+  console.log("Task 18: ", getAllPropValues("quantity")); // [ 4, 3, 7, 9 ]
+  console.log("Task 18: ", getAllPropValues("available")); // [ ]
 }
 
 /* *** Task 19 *** */
@@ -112,20 +139,26 @@
 // из массива products или возвращает 0, если такой продукт не найден в массиве.
 {
   const products = [
-    { name: 'Радар', price: 1300, quantity: 4 },
-    { name: 'Сканер', price: 2700, quantity: 3 },
-    { name: 'Дрон', price: 400, quantity: 7 },
-    { name: 'Принтер', price: 1200, quantity: 9 },
+    { name: "Радар", price: 1300, quantity: 4 },
+    { name: "Сканер", price: 2700, quantity: 3 },
+    { name: "Дрон", price: 400, quantity: 7 },
+    { name: "Принтер", price: 1200, quantity: 9 },
   ];
 
   function calculateTotalPrice(productName) {
     // Пиши код здесь
+    for (product of products) {
+      if (product.name === productName) {
+        return product.price * product.quantity;
+      }
+    }
+    return 0;
   }
 
-  console.log('Task 19: ', calculateTotalPrice('Радар')); // 5200
-  console.log('Task 19: ', calculateTotalPrice('Сканер')); // 8100
-  console.log('Task 19: ', calculateTotalPrice('Дрон')); // 2800
-  console.log('Task 19: ', calculateTotalPrice('Компьютер')); // 0
+  console.log("Task 19: ", calculateTotalPrice("Радар")); // 5200
+  console.log("Task 19: ", calculateTotalPrice("Сканер")); // 8100
+  console.log("Task 19: ", calculateTotalPrice("Дрон")); // 2800
+  console.log("Task 19: ", calculateTotalPrice("Компьютер")); // 0
 }
 
 /* *** Task 20 *** */
@@ -141,11 +174,12 @@
     tomorrow: 33,
   };
   // Пиши код ниже этой строки
+  let { yesterday, today, tomorrow } = highTemperatures;
 
-  const meanTemperature = undefined; // исправьте эту строку
+  const meanTemperature = (yesterday + today + tomorrow) / 3; // исправьте эту строку
   // Пиши код выше этой строки
 
-  console.log('Task 20: ', meanTemperature); // 29
+  console.log("Task 20: ", meanTemperature); // 29
 }
 
 /* *** Task 21 *** */
@@ -160,10 +194,15 @@
     tomorrow: 33,
   };
   // Пиши код ниже этой строки
-
+  let {
+    yesterday,
+    today,
+    tomorrow,
+    icon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
+  } = highTemperatures;
   // Пиши код выше этой строки
 
-  console.log('Task 21: ');
+  console.log("Task 21: ", yesterday, today, tomorrow, icon);
 }
 
 /* *** Task 22 *** */
@@ -180,11 +219,16 @@
     tomorrow: 33,
   };
   // Пиши код ниже этой строки
-
+  let {
+    yesterday: highYesterday,
+    today: highToday,
+    tomorrow: highTomorrow,
+    icon: highIcon = "https://www.flaticon.com/svg/static/icons/svg/2204/2204346.svg",
+  } = highTemperatures;
   // Пиши код выше этой строки
   // const meanTemperature = (highYesterday + highToday + highTomorrow) / 3;
 
-  console.log('Task 22: ');
+  console.log("Task 22: ", highYesterday, highToday, highTomorrow, highIcon);
 }
 
 /* *** Task 23 *** */
@@ -193,17 +237,23 @@
 // значениями из массива объектов colors
 {
   const colors = [
-    { hex: '#f44336', rgb: '244,67,54' },
-    { hex: '#2196f3', rgb: '33,150,243' },
-    { hex: '#4caf50', rgb: '76,175,80' },
-    { hex: '#ffeb3b', rgb: '255,235,59' },
+    { hex: "#f44336", rgb: "244,67,54" },
+    { hex: "#2196f3", rgb: "33,150,243" },
+    { hex: "#4caf50", rgb: "76,175,80" },
+    { hex: "#ffeb3b", rgb: "255,235,59" },
   ];
 
   const hexColors = [];
   const rgbColors = [];
   // Пиши код ниже этой строки
 
-  console.log('Task 23: ', hexColors, rgbColors);
+  for (color of colors) {
+    let { hex: h, rgb: r } = color;
+    hexColors.push(h);
+    rgbColors.push(r);
+  }
+
+  console.log("Task 23: ", hexColors, rgbColors);
 }
 
 /* *** Task 24 *** */
@@ -216,7 +266,7 @@
     today: {
       low: 28,
       high: 32,
-      icon: 'https://www.flaticon.com/svg/static/icons/svg/861/861059.svg',
+      icon: "https://www.flaticon.com/svg/static/icons/svg/861/861059.svg",
     },
     tomorrow: {
       low: 27,
@@ -226,9 +276,14 @@
   // Пиши код ниже этой строки
   function calculateMeanTemperature(forecast) {
     // Пиши код выше этой строки
+    let {
+      today: { low: todayLow, high: todayHigh },
+      tomorrow: { low: tomorrowLow, high: tomorrowHigh },
+    } = forecast;
+
     // раскомментируй строку ниже
-    // return (todayLow + todayHigh + tomorrowLow + tomorrowHigh) / 4;
+    return (todayLow + todayHigh + tomorrowLow + tomorrowHigh) / 4;
   }
 
-  console.log('Task 24: ', calculateMeanTemperature(forecast));
+  console.log("Task 24: ", calculateMeanTemperature(forecast));
 }

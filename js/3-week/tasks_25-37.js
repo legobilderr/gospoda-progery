@@ -4,11 +4,11 @@
 // для получения bestScore и worstScore.
 {
   const scores = [89, 64, 42, 17, 93, 51, 26];
-  const bestScore = undefined; // Пиши код в этой строке
-  const worstScore = undefined; // Пиши код в этой строке
+  const bestScore = Math.max(...scores); // Пиши код в этой строке
+  const worstScore = Math.min(...scores); // Пиши код в этой строке
 
-  console.log('Task 25: ', bestScore); // 93
-  console.log('Task 25: ', worstScore); // 17
+  console.log("Task 25: ", bestScore); // 93
+  console.log("Task 25: ", worstScore); // 17
 }
 
 /* *** Task 26 *** */
@@ -20,13 +20,17 @@
   const secondGroupScores = [89, 14, 51, 26];
   const thirdGroupScores = [29, 47, 18, 97, 81];
 
-  const allScores = undefined; // Пиши код в этой строке
-  const bestScore = undefined; // Пиши код в этой строке
-  const worstScore = undefined; // Пиши код в этой строке
+  const allScores = [
+    ...firstGroupScores,
+    ...secondGroupScores,
+    ...thirdGroupScores,
+  ]; // Пиши код в этой строке
+  const bestScore = Math.max(...allScores); // Пиши код в этой строке
+  const worstScore = Math.min(...allScores); // Пиши код в этой строке
 
-  console.log('Task 26: ', allScores);
-  console.log('Task 26: ', bestScore); // 97
-  console.log('Task 26: ', worstScore); // 14
+  console.log("Task 26: ", allScores);
+  console.log("Task 26: ", bestScore); // 97
+  console.log("Task 26: ", worstScore); // 14
 }
 
 /* *** Task 27 *** */
@@ -34,7 +38,7 @@
 // Выведите объект finalSettings в консоль и обратите внимание, что значения некоторых полей перезаписались.
 {
   const defaultSettings = {
-    theme: 'light',
+    theme: "light",
     public: true,
     withPassword: false,
     minNumberOfQuestions: 10,
@@ -46,9 +50,9 @@
     timePerQuestion: 30,
   };
 
-  const finalSettings = undefined; // Пиши код в этой строке
+  const finalSettings = { ...defaultSettings, ...overrideSettings }; // Пиши код в этой строке
 
-  console.log('Task 27: ', finalSettings); // 10
+  console.log("Task 27: ", finalSettings); // 10
 }
 
 /* *** Task 28 *** */
@@ -56,19 +60,19 @@
 // новый объект с задачей и полями completed, category, priority.
 {
   const toDo = {
-    task: 'Сделать домашку по JS',
+    task: "Сделать домашку по JS",
   };
 
   function makeTask(data) {
     const completed = false;
-    const category = 'Общее';
-    const priority = 'Обычный';
+    const category = "Общее";
+    const priority = "Обычный";
     // Пиши код ниже этой строки
-
+    return { ...data, completed, category, priority };
     // Пиши код выше этой строки
   }
 
-  console.log('Task 28: ', makeTask(toDo));
+  console.log("Task 28: ", makeTask(toDo));
 }
 
 /* *** Task 29 *** */
@@ -77,10 +81,12 @@
 // Для этого используйте оператор rest и arguments функции
 // Функция возвращает общую сумму всех переданных аргументов.
 {
-  function add() {}
+  function add() {
+    return [...arguments].reduce((a, b) => a + b, 0);
+  }
 
-  console.log('Task 29: ', add(4, 10, 3)); // 17
-  console.log('Task 29: ', add(6, 14, 5, 3, 20)); // 48
+  console.log("Task 29: ", add(4, 10, 3)); // 17
+  console.log("Task 29: ", add(6, 14, 5, 3, 20)); // 48
 }
 
 /* *** Task 30 *** */
@@ -92,13 +98,21 @@
   function findMatches() {
     const matches = []; // Не изменяй эту строку
 
+    const [arrrr, ...rest] = [...arguments];
+    // arrrr.filter((value) => rest.includes(value));
+    for (value of rest) {
+      if (arrrr.includes(value)) {
+        matches.push(value);
+      }
+    }
+
     // Пиши код выше этой строки
     return matches;
   }
 
-  console.log('Task 30: ', findMatches([4, 3, 2, 5, 17, 10], 8, 24, 10, 11, 3)); // [ 10, 3 ]
-  console.log('Task 30: ', findMatches([16, 14, 6, 7], 12, 20, 11, 6)); // [ 6 ]
-  console.log('Task 30: ', findMatches([10, 20], 12, 30, 11, 6)); // [ ]
+  console.log("Task 30: ", findMatches([4, 3, 2, 5, 17, 10], 8, 24, 10, 11, 3)); // [ 10, 3 ]
+  console.log("Task 30: ", findMatches([16, 14, 6, 7], 12, 20, 11, 6)); // [ 6 ]
+  console.log("Task 30: ", findMatches([10, 20], 12, 30, 11, 6)); // [ ]
 }
 
 /* *** Task 31 *** */
@@ -114,9 +128,35 @@
 {
   const bookShelf = {
     // Пиши код здесь
-  };
+    books: ["Последнее королевство", "Страж снов"],
 
-  console.log('Task 31: ', bookShelf);
+    getBooks: () => {
+      console.log("Возвращаем все книги");
+    },
+    addBook(name) {
+      this.books.push(name);
+      console.log("Добавляем книгу ", name);
+    },
+    rmBooks(name) {
+      this.books = this.books.filter((e) => e !== name);
+      console.log("Удаляем книгу ", name);
+    },
+    updtBooks(oldBok, newBook) {
+      this.books = this.books.map((book) => {
+        if (book == oldBok) {
+          return newBook;
+        }
+        return oldBok;
+      });
+      console.log(`Обновляем книгу ${oldBok} на ${newBook}`);
+    },
+  };
+  bookShelf.getBooks();
+  bookShelf.addBook("note");
+  bookShelf.rmBooks("note");
+  bookShelf.updtBooks("Страж снов", "Сон");
+
+  console.log("Task 31: ", bookShelf.books);
 }
 
 /* *** Task 32 *** */
@@ -126,14 +166,14 @@
 
 {
   const bookShelf = {
-    books: ['Последнее королевство', 'Мгла', 'Страж снов'],
+    books: ["Последнее королевство", "Мгла", "Страж снов"],
     updateBook(oldName, newName) {
       // Пиши код здесь
     },
   };
 
-  console.log('Task 32: ', bookShelf.updateBook('Мгла', 'Свет'));
-  console.log('Task 32: ', bookShelf.books);
+  console.log("Task 32: ", bookShelf.updateBook("Мгла", "Свет"));
+  console.log("Task 32: ", bookShelf.books);
 }
 
 /* *** Task 33 *** */
@@ -144,34 +184,34 @@
     // Пиши код здесь
   };
 
-  console.log('Task 33: ', atTheOldToad); // дописать вызов метода getPotions
+  console.log("Task 33: ", atTheOldToad); // дописать вызов метода getPotions
 }
 
 /* *** Task 34 *** */
 // Реализуйте в объекте atTheOldToad метод addPotion, который добавляет новое зелье в potions.
 {
   const atTheOldToad = {
-    potions: ['Зелье скорости', 'Дыхание дракона', 'Каменная кожа'],
+    potions: ["Зелье скорости", "Дыхание дракона", "Каменная кожа"],
     addPotion(potionName) {
       // Пиши код здесь
     },
   };
 
-  atTheOldToad.addPotion('Аромат скунса');
-  console.log('Task 34: ', atTheOldToad.potions);
+  atTheOldToad.addPotion("Аромат скунса");
+  console.log("Task 34: ", atTheOldToad.potions);
 }
 
 /* *** Task 35 *** */
 // Реализуйте в объекте atTheOldToad метод removePotion, который удаляет переданное в качестве аргумента зелье из potions.
 {
   const atTheOldToad = {
-    potions: ['Зелье скорости', 'Дыхание дракона', 'Каменная кожа'],
+    potions: ["Зелье скорости", "Дыхание дракона", "Каменная кожа"],
     removePotion(potionName) {
       // Пиши код здесь
     },
   };
-  atTheOldToad.removePotion('Зелье скорости');
-  console.log('Task 35: ', atTheOldToad.potions);
+  atTheOldToad.removePotion("Зелье скорости");
+  console.log("Task 35: ", atTheOldToad.potions);
 }
 
 /* *** Task 36 *** */
@@ -179,13 +219,13 @@
 // зелье на новое (из аргумента 2).
 {
   const atTheOldToad = {
-    potions: ['Зелье скорости', 'Дыхание дракона', 'Каменная кожа'],
+    potions: ["Зелье скорости", "Дыхание дракона", "Каменная кожа"],
     updatePotionName(oldName, newName) {
       // Пиши код здесь
     },
   };
-  atTheOldToad.updatePotionName('Зелье скорости', 'Индийский чай');
-  console.log('Task 36: ', atTheOldToad.potions);
+  atTheOldToad.updatePotionName("Зелье скорости", "Индийский чай");
+  console.log("Task 36: ", atTheOldToad.potions);
 }
 
 /* *** Task 37 *** */
@@ -199,9 +239,9 @@
 {
   const atTheOldToad = {
     potions: [
-      { name: 'Зелье скорости', price: 460 },
-      { name: 'Дыхание дракона', price: 780 },
-      { name: 'Каменная кожа', price: 520 },
+      { name: "Зелье скорости", price: 460 },
+      { name: "Дыхание дракона", price: 780 },
+      { name: "Каменная кожа", price: 520 },
     ],
     // Пиши код ниже этой строки
     getPotions() {},
@@ -211,8 +251,14 @@
     // Пиши код выше этой строки
   };
 
-  console.log('Task 37: ', atTheOldToad.addPotion({ name: 'Перо феникса', price: 820 }));
-  console.log('Task 37: ', atTheOldToad.removePotion('Каменная кожа'));
-  console.log('Task 37: ', atTheOldToad.updatePotionName('Зелье скорости', 'Индийский чай'));
-  console.log('Task 37: ', atTheOldToad.getPotions());
+  console.log(
+    "Task 37: ",
+    atTheOldToad.addPotion({ name: "Перо феникса", price: 820 })
+  );
+  console.log("Task 37: ", atTheOldToad.removePotion("Каменная кожа"));
+  console.log(
+    "Task 37: ",
+    atTheOldToad.updatePotionName("Зелье скорости", "Индийский чай")
+  );
+  console.log("Task 37: ", atTheOldToad.getPotions());
 }
