@@ -244,10 +244,42 @@
       { name: "Каменная кожа", price: 520 },
     ],
     // Пиши код ниже этой строки
-    getPotions() {},
-    addPotion(potion) {},
-    removePotion(potionName) {},
-    updatePotionName(oldName, newName) {},
+    getPotions() {
+      return this.potions;
+    },
+    addPotion(potion) {
+      if (
+        this.potions.filter((potionThis) => potionThis.name === potion.name)
+          .length > 0
+      ) {
+        return `Зелье ${potion.name} уже есть в инвентаре!`;
+      } else {
+        this.potions.push(potion);
+      }
+      return this.potions;
+    },
+    removePotion(tjpotionName) {
+      if (
+        this.potions.filter((potion) => potion.name === tjpotionName).length > 0
+      ) {
+        this.potions = this.potions.filter(
+          (potion) => potion.name !== tjpotionName
+        );
+        return this.potions;
+      } else {
+        return `"Зелья ${tjpotionName} нет в инвентаре!"`;
+      }
+    },
+    updatePotionName(oldName, newName) {
+      if (this.potions.filter((potion) => potion.name === oldName).length > 0) {
+        this.potions.map((potion) => {
+          potion.name == oldName ? (potion.name = newName) : potion;
+        });
+      } else {
+        return `"Зелья ${oldName} нет в инвентаре!"`;
+      }
+      return this.potions;
+    },
     // Пиши код выше этой строки
   };
 
