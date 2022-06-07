@@ -6,7 +6,16 @@
 // Выведите в консоль.
 {
   // Пиши код ниже этой строки
-  console.log('Task 1: ');
+
+  const Car = function ({ name, model, price } = {}) {
+    this.name = name;
+    this.model = model;
+    this.price = price;
+  };
+  let tesla = new Car({ name: "tesla", model: "modelX", price: 100000 });
+  let audi = new Car({ name: "audi", model: "rs3", price: 60000 });
+  let mersedes = new Car({ name: "mersedes", model: "clk270", price: 8000 });
+  console.log("Task 1: ", tesla, audi, mersedes);
   //
 }
 
@@ -18,7 +27,23 @@
 // - установитьЦену, который ! ЧЕРЕЗ this ! меняет цену автомобиля на переданную в качестве параметра
 // Создайте при помощи ключевого слова new автомобиль и вызовите эти 2 функции
 {
-  console.log('Task 2: ');
+  const Car = function ({ name, model, price } = {}) {
+    this.name = name;
+    this.model = model;
+    this.price = price;
+  };
+  Car.prototype.GetPrice = function () {
+    return this.price;
+  };
+  Car.prototype.SetPrice = function (NewPrice) {
+    this.price = NewPrice;
+    return "price updated";
+  };
+
+  let tesla = new Car({ name: "tesla", model: "modelX", price: 100000 });
+  console.log("Task 2: ", tesla.GetPrice());
+  console.log("Task 2: ", tesla.SetPrice(2000000));
+  console.log("Task 2: ", tesla.GetPrice());
 }
 
 /* *** Task 3 *** */
@@ -28,14 +53,30 @@
 // По возвращаемому значению (см. комментарии) определите, что должен делать метод.
 {
   // Пиши код ниже этой строки
-  function Storage() {}
+  function Storage(data) {
+    this.data = data;
+  }
+
+  Storage.prototype.getItems = function () {
+    return this.data;
+  };
+
+  Storage.prototype.addItem = function (dataItem) {
+    this.data.push(dataItem);
+  };
+
+  Storage.prototype.removeItem = function (dataItem) {
+    this.data = this.data.filter(function (e) {
+      return e != dataItem;
+    });
+  };
   // Пиши код выше этой строки
-  console.log('Task 3: ');
-  const storage = new Storage(['Games', 'Video', 'Documents']);
+  console.log("Task 3: ");
+  const storage = new Storage(["Games", "Video", "Documents"]);
   console.log(storage.getItems()); // ["Games", "Video", "Documents"]
-  storage.addItem('Music');
+  storage.addItem("Music");
   console.log(storage.getItems()); // ["Games", "Video", "Documents", "Music"]
-  storage.removeItem('Video');
+  storage.removeItem("Video");
   console.log(storage.getItems()); // ["Games", "Documents", "Music"]
   //
 }
@@ -47,17 +88,35 @@
 // По возвращаемому значению (см. комментарии) определите, что должен делать метод.
 {
   // Пиши код ниже этой строки
-  function StringBuilder() {}
+  function StringBuilder(smileNouse = ".") {
+    this.smile = smileNouse;
+  }
+
+  StringBuilder.prototype.getValue = function (smileLeftEye) {
+    return this.smile;
+  };
+
+  StringBuilder.prototype.padStart = function (smileLeftEye) {
+    this.smile = smileLeftEye + this.smile;
+  };
+
+  StringBuilder.prototype.padEnd = function (smileRightEye) {
+    this.smile = this.smile + smileRightEye;
+  };
+
+  StringBuilder.prototype.padBoth = function (smileЕars) {
+    this.smile = smileЕars + this.smile + smileЕars;
+  };
 
   // Пиши код выше этой строки
-  console.log('Task 4: ');
-  const builder = new StringBuilder('.');
+  console.log("Task 4: ");
+  const builder = new StringBuilder(".");
   console.log(builder.getValue()); // '.'
-  builder.padStart('^');
+  builder.padStart("^");
   console.log(builder.getValue()); // '^.'
-  builder.padEnd('^');
+  builder.padEnd("^");
   console.log(builder.getValue()); // '^.^'
-  builder.padBoth('=');
+  builder.padBoth("=");
   console.log(builder.getValue()); // '=^.^='
   //
 }
@@ -68,8 +127,14 @@
 // Создайте при помощи данного класса автомобиль и выведите его в консоль.
 {
   // Пиши код ниже этой строки
+  class Car {
+    constructor({ brand, model, price } = {}) {
+      (this.brand = brand), (this.model = model), (this.price = price);
+    }
+  }
+  const audi = new Car({ brand: "audi", model: "a3", price: 20000 });
 
-  console.log('Task 5: ');
+  console.log("Task 5: ", audi);
   //
 }
 
@@ -81,8 +146,25 @@
 // В методе изменитьЦену осуществите проверку какой аргумент приходит.
 // !!! Цена - это обязательно ПОЛОЖИТЕЛЬНОЕ ЧИСЛО.
 {
+  class Car {
+    constructor({ brand, model, price } = {}) {
+      (this.brand = brand), (this.model = model), (this.price = price);
+    }
+    get priceObj() {
+      return this.price;
+    }
+    set priceObj(NewPrice) {
+      this.price = NewPrice;
+    }
+  }
+
+  const audi = new Car({ brand: "audi", model: "a3", price: 20000 });
+  console.log(audi);
+  console.log(audi.price);
+  audi.price = 19000;
+  console.log(audi);
   // Пиши код ниже этой строки
-  console.log('Task 6: ');
+  console.log("Task 6: ");
   //
 }
 
@@ -92,7 +174,26 @@
 // - изменитьДвигатель
 {
   // Пиши код ниже этой строки
-  console.log('Task 7: ');
+
+  class Car {
+    #engin = "v6";
+
+    constructor() {}
+
+    get objectEngin() {
+      return this.#engin;
+    }
+
+    set objectEngin(newEngin) {
+      this.#engin = newEngin;
+    }
+  }
+
+  const car = new Car();
+  console.log(car.objectEngin);
+  car.objectEngin = "v8";
+  console.log(car.objectEngin);
+  console.log("Task 7: ");
   //
 }
 
@@ -102,14 +203,33 @@
 // По возвращаемому значению (см. комментарии) определите, что должен делать метод класса.
 {
   // Пиши код ниже этой строки
-  class Storage {}
+  class Storage {
+    #items = undefined;
+    constructor(items = []) {
+      this.#items = items;
+    }
+
+    getItems() {
+      return this.#items;
+    }
+
+    addItem(item) {
+      this.#items.push(item);
+    }
+
+    removeItem(item) {
+      this.#items = this.#items.filter((e) => {
+        return e != item;
+      });
+    }
+  }
   // Пиши код выше этой строки
-  console.log('Task 8: ');
-  const storage = new Storage(['Games', 'Video', 'Documents']);
+  console.log("Task 8: ");
+  const storage = new Storage(["Games", "Video", "Documents"]);
   console.log(storage.getItems()); // ["Games", "Video", "Documents"]
-  storage.addItem('Music');
+  storage.addItem("Music");
   console.log(storage.getItems()); // ["Games", "Video", "Documents", "Music"]
-  storage.removeItem('Video');
+  storage.removeItem("Video");
   console.log(storage.getItems()); // ["Games", "Documents", "Music"]
 }
 
@@ -119,16 +239,36 @@
 // По возвращаемому значению (см. комментарии) определите, что должен делать метод класса.
 {
   // Пиши код ниже этой строки
-  class StringBuilder {}
+  class StringBuilder {
+    constructor(duafult = ".") {
+      this.smileFace = duafult;
+    }
+    getValue() {
+      return this.smileFace;
+    }
+
+    padStart(left) {
+      this.smileFace = left + this.smileFace;
+    }
+    padEnd(right) {
+      this.smileFace = this.smileFace + right;
+    }
+    padBoth(ears) {
+      this.smileFace = ears + this.smileFace + ears;
+    }
+    clear() {
+      this.smileFace = "";
+    }
+  }
   // Пиши код выше этой строки
-  console.log('Task 9: ');
-  const builder = new StringBuilder('.');
+  console.log("Task 9: ");
+  const builder = new StringBuilder(".");
   console.log(builder.getValue()); // '.'
-  builder.padStart('^');
+  builder.padStart("^");
   console.log(builder.getValue()); // '^.'
-  builder.padEnd('^');
+  builder.padEnd("^");
   console.log(builder.getValue()); // '^.^'
-  builder.padBoth('=');
+  builder.padBoth("=");
   console.log(builder.getValue()); // '=^.^='
   builder.clear();
   console.log(builder.getValue()); // ''
@@ -138,7 +278,39 @@
 // Реализуйте класс Car так, чтобы в нем для каждого поля была функция-сеттер и функция-геттер
 // Всего в классе 3 приватных поля: марка, модель, цена
 {
-  console.log('Task 10: ');
+  class Car {
+    #brand;
+    #model;
+    #price;
+
+    constructor({ brand, model, price } = {}) {
+      (this.#brand = brand), (this.#model = model), (this.#price = price);
+    }
+
+    get objBrand() {
+      return this.#brand;
+    }
+    set objBrand(newBrand) {
+      this.brand = newBrand;
+    }
+    get objModel() {
+      return this.model;
+    }
+    set objModel(newModel) {
+      this.brand = newBrand;
+    }
+    get objPrice() {
+      return this.brand;
+    }
+    set objPrice(newBrand) {
+      this.brand = newBrand;
+    }
+  }
+
+  const audi = new Car({ brand: "audi", model: "a3", price: 20000 });
+  console.log(audi);
+  console.log(audi.objBrand);
+  console.log("Task 10: ");
 }
 
 /* *** Task 11 *** */
@@ -149,18 +321,33 @@
 {
   class Car {
     // Пиши код ниже этой строки
+    static maxPrice = 50000;
+    #price;
+    constructor({ price } = {}) {
+      this.#price = price;
+    }
+
+    get objprice() {
+      return this.#price;
+    }
+
+    set objprice(newPrice) {
+      newPrice < Car.maxPrice
+        ? (this.#price = newPrice)
+        : console.log("слишком большая цена ");
+    }
     // Пиши код выше этой строки
   }
-  console.log('Task 11: ');
+  console.log("Task 11: ");
 
   const audi = new Car({ price: 35000 });
-  console.log(audi.price); // 35000
+  console.log(audi.objprice); // 35000
 
-  audi.price = 49000;
-  console.log(audi.price); // 49000
+  audi.objprice = 49000;
+  console.log(audi.objprice); // 49000
 
-  audi.price = 51000;
-  console.log(audi.price); // 49000
+  audi.objprice = 51000;
+  console.log(audi.objprice); // 49000
 }
 
 /* *** Task 12 *** */
@@ -170,14 +357,34 @@
 {
   class Car {
     // Пиши код ниже этой строки
-    // Скопируйте код внутри класса из задания 11
+    static maxPrice = 50000;
+
+    static checkPrice(new_price) {
+      return new_price < Car.maxPrice
+        ? "Всё хорошо, цена в порядке."
+        : "Внимание! Цена превышает допустимую.";
+    }
+    #price;
+    constructor({ price } = {}) {
+      this.price = price;
+    }
+
+    get objprice() {
+      return this.#price;
+    }
+
+    set objprice(newPrice) {
+      newPrice < Car.maxPrice
+        ? (this.#price = newPrice)
+        : console.log("слишком большая цена ");
+    }
     // Пиши код выше этой строки
   }
 
   const audi = new Car({ price: 36000 });
   const bmw = new Car({ price: 64000 });
 
-  console.log('Task 12: ');
+  console.log("Task 12: ");
   console.log(Car.checkPrice(audi.price)); // Всё хорошо, цена в порядке.
   console.log(Car.checkPrice(bmw.price)); // Внимание! Цена превышает допустимую.
 }

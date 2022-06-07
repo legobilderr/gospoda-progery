@@ -20,9 +20,19 @@
       this.email = newEmail;
     }
   }
+
+  class Admin extends User {
+    static accessLevel = {
+      deafult: "базовый",
+      SUPERUSER: "суперюзер ",
+    };
+    constructor() {
+      super();
+    }
+  }
   // Пиши код ниже этой строки
 
-  console.log('Task 13: ');
+  console.log("Task 13: ", Admin.accessLevel);
 }
 
 /* *** Task 14 *** */
@@ -49,18 +59,26 @@
 
   class Admin extends User {
     // Пиши код ниже этой строки
+    static AccessLevel = {
+      deafult: "базовый",
+      SUPERUSER: "суперюзер ",
+    };
+    constructor({ email, accessLevel } = {}) {
+      super(email);
+      this.accessLevel = accessLevel;
+    }
     // Пиши код выше этой строки
   }
-
+  console.log(Admin.AccessLevel.SUPERUSER);
   const mango = new Admin({
-    email: 'mango@mail.com',
+    email: "mango@mail.com",
     accessLevel: Admin.AccessLevel.SUPERUSER,
   });
 
   console.log(mango.email); // mango@mail.com
   console.log(mango.accessLevel); // superuser
 
-  console.log('Task 14: ');
+  console.log("Task 14: ");
 }
 
 /* *** Task 15 *** */
@@ -88,22 +106,42 @@
       this.email = newEmail;
     }
   }
+
   class Admin extends User {
     // Пиши код ниже этой строки
+
+    static AccessLevel = {
+      deafult: "базовый",
+      SUPERUSER: "суперюзер ",
+    };
+
+    constructor({ email, accessLevel } = {}) {
+      super(email);
+      this.accessLevel = accessLevel;
+      this.blacklistedEmails = [];
+    }
+
+    blacklist(email) {
+      this.blacklistedEmails.push(email);
+    }
+
+    isBlacklisted(email) {
+      return this.blacklistedEmails.includes(email);
+    }
     // Пиши код выше этой строки
   }
 
   const mango = new Admin({
-    email: 'mango@mail.com',
+    email: "mango@mail.com",
     accessLevel: Admin.AccessLevel.SUPERUSER,
   });
 
   console.log(mango.email); // mango@mail.com
   console.log(mango.accessLevel); // superuser
-  mango.blacklist('poly@mail.com');
+  mango.blacklist("poly@mail.com");
   console.log(mango.blacklistedEmails); // 'poly@mail.com'
-  console.log(mango.isBlacklisted('mango@mail.com')); //  false
-  console.log(mango.isBlacklisted('poly@mail.com')); // true
+  console.log(mango.isBlacklisted("mango@mail.com")); //  false
+  console.log(mango.isBlacklisted("poly@mail.com")); // true
 
-  console.log('Task 15: ');
+  console.log("Task 15: ");
 }
