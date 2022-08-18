@@ -9,7 +9,7 @@
     // Пиши код ниже этой строки
     if (Array.isArray(orderedItems)) {
       orderedItems.forEach((value) =>
-        isNaN(value) ? console.log("eror not number") : (totalPrice += value)
+        isNaN(value) ? "" : (totalPrice += value)
       );
     } else {
       totalPrice = "eror not array";
@@ -126,7 +126,8 @@
 // !!! Записать функцию нужно максимально коротко !!!
 {
   // Пиши код ниже этой строки
-  const changeEven = undefined;
+  const changeEven = (numbers, value) =>
+    numbers.map((number) => (number % 2 === 0 ? (number += value) : number));
 
   // Пиши код выше этой строки
 
@@ -152,7 +153,7 @@
   ];
   // Пиши код ниже этой строки
 
-  const titles = undefined;
+  const titles = books.map((book) => book.title);
   // Пиши код ниже этой строки
   console.log("Task 7: ", titles);
   //
@@ -175,7 +176,15 @@
   ];
   // Пиши код ниже этой строки
 
-  const authorsInitials = undefined;
+  const authorsInitials = books.map((book) =>
+    book.author
+      .split(" ")
+      .reduce(
+        (accumulator, currentValue) =>
+          accumulator + currentValue.substring(0, 1),
+        ""
+      )
+  );
   // Пиши код выше этой строки
   console.log("Task 8: ", authorsInitials); // ['БК', "РШ", "ТШ", "ЛТ", "БК"]
 }
@@ -202,7 +211,7 @@
   ];
   // Пиши код ниже этой строки
 
-  const genres = undefined;
+  const genres = books.flatMap((items) => items.genres);
   // Пиши код выше этой строки
   console.log("Task 9: ", genres); // ['приключения', 'историческое', 'фантастика', 'ужасы', 'мистика']
 }
@@ -229,7 +238,9 @@
     },
   ];
   // Пиши код ниже этой строки
-  const uniqueGenres = undefined;
+  const uniqueGenres = books
+    .flatMap((items) => (items.genres ? items.genres : ""))
+    .filter((value, indx, self) => self.indexOf(value) === indx);
   console.log("Task 10: ", uniqueGenres); //['приключения', 'историческое', 'фантастика', 'мистика', 'ужасы']
 }
 
@@ -254,7 +265,22 @@
   const MIN_RATING = 8.5;
   // Пиши код ниже этой строки
 
-  const topBooks = undefined;
+  const topBooks = books
+    .reduce((accumulator, currentValue) => {
+      if (currentValue.rating > MIN_RATING) {
+        return accumulator.concat(currentValue);
+      }
+      return accumulator;
+    }, [])
+    .sort((a, b) => {
+      if (a.rating > b.rating) {
+        return 1;
+      }
+      if (a.rating < b.rating) {
+        return -1;
+      }
+      return 0;
+    });
   console.log("Task 11: ", topBooks);
 }
 
@@ -268,7 +294,22 @@
     { name: "Dan Balan", friends: ["Igor, Vova, Kolya"] },
   ];
   // Пиши код ниже этой строки
-  const getUsersWithFriend = undefined;
+  const getUsersWithFriend = (users, name) => {
+    const answer = users
+      .filter((item) => item.friends[0].includes(name))
+      .map((v) => v.name);
+
+    switch (true) {
+      case answer.length > 1:
+        return `тут перечислены ${answer.length} юзера ${answer}`;
+
+      case answer.length == 1:
+        return `тут перечислен ${answer.length} юзер ${answer}`;
+
+      case answer.length == 0:
+        return null;
+    }
+  };
   // Пиши код выше этой строки
 
   console.log("Task 12: ", getUsersWithFriend(users, "Taras")); // тут перечислены 3 юзера Ivan, Thimothy, Mango
