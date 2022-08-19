@@ -4,18 +4,18 @@
 
 {
   const users = [
-    { name: 'Ivan Best', friends: ['Vasya', 'Taras', 'Ilya', 'Kolya', 'Oleg'] },
-    { name: 'Thimothy First', friends: ['Sergey', 'Lena', 'Ira'] },
-    { name: 'Mango Tasty', friends: ['Zina', 'Kristina', 'Dima', 'Sasha'] },
-    { name: 'Dan Balan', friends: ['Igor', 'Vova'] },
+    { name: "Ivan Best", friends: ["Vasya", "Taras", "Ilya", "Kolya", "Oleg"] },
+    { name: "Thimothy First", friends: ["Sergey", "Lena", "Ira"] },
+    { name: "Mango Tasty", friends: ["Zina", "Kristina", "Dima", "Sasha"] },
+    { name: "Dan Balan", friends: ["Igor", "Vova"] },
   ];
   // Пиши код ниже этой строки
 
   const sortByDescendingFriendCount = () => {
-    return;
+    return users.sort((a, b) => (a.friends.length > b.friends.length ? -1 : 1));
   };
 
-  console.log('Task 25: ', sortByDescendingFriendCount());
+  console.log("Task 25: ", sortByDescendingFriendCount());
 }
 
 /* *** Task 26 *** */
@@ -25,18 +25,23 @@
 
 {
   const users = [
-    { name: 'Манго', orders: [120, 100, 50, 30] },
-    { name: 'Поли', orders: [50, 70, 110, 20] },
-    { name: 'Аякс', orders: [70, 130, 200, 80] },
-    { name: 'Киви', orders: [30, 20, 40] },
+    { name: "Манго", orders: [120, 100, 50, 30] },
+    { name: "Поли", orders: [50, 70, 110, 20] },
+    { name: "Аякс", orders: [70, 130, 200, 80] },
+    { name: "Киви", orders: [30, 20, 40] },
   ];
   // Пиши код ниже этой строки
 
   const sortByAscendingTotalOrders = () => {
-    return;
+    return users.sort((a, b) =>
+      a.orders.reduce((aAcc, curentA) => aAcc + curentA, 0) >
+      b.orders.reduce((bAcc, curentB) => bAcc + curentB, 0)
+        ? -1
+        : 1
+    );
   };
 
-  console.log('Task 26: ', sortByAscendingTotalOrders());
+  console.log("Task 26: ", sortByAscendingTotalOrders());
 }
 
 /* *** Task 27 *** */
@@ -44,18 +49,24 @@
 
 {
   const books = [
-    { title: 'Последнее королевство', author: 'Бернард Корнуэлл', rating: 7.38 },
-    { title: 'На берегу спокойных вод', author: 'Роберт Шекли', rating: 8.51 },
-    { title: 'Заповіт', author: 'Тарас Шевченко', rating: 8.25 },
-    { title: 'Красна как кровь', author: 'Ли Танит', rating: 7.14 },
-    { title: 'Сны В Ведьмином Доме', author: 'Говард Лавкрафт', rating: 8.67 },
+    {
+      title: "Последнее королевство",
+      author: "Бернард Корнуэлл",
+      rating: 7.38,
+    },
+    { title: "На берегу спокойных вод", author: "Роберт Шекли", rating: 8.51 },
+    { title: "Заповіт", author: "Тарас Шевченко", rating: 8.25 },
+    { title: "Красна как кровь", author: "Ли Танит", rating: 7.14 },
+    { title: "Сны В Ведьмином Доме", author: "Говард Лавкрафт", rating: 8.67 },
   ];
   const MIN_BOOK_RATING = 8;
   // Пиши код ниже этой строки
 
-  const names = undefined;
+  const names = books
+    .filter((book) => book.rating > MIN_BOOK_RATING)
+    .sort((a, b) => (a.author < b.author ? -1 : 1));
 
-  console.log('Task 27: ', names);
+  console.log("Task 27: ", names);
 }
 
 /* *** Task 28 *** */
@@ -64,18 +75,20 @@
 
 {
   const users = [
-    { name: 'Ivan Best', friends: ['Vasya', 'Taras', 'Ilya', 'Kolya', 'Oleg'] },
-    { name: 'Thimothy First', friends: ['Sergey', 'Lena', 'Ira'] },
-    { name: 'Mango Tasty', friends: ['Zina', 'Kristina', 'Dima', 'Sasha'] },
-    { name: 'Dan Balan', friends: ['Igor', 'Vova'] },
+    { name: "Ivan Best", friends: ["Vasya", "Taras", "Ilya", "Kolya", "Oleg"] },
+    { name: "Thimothy First", friends: ["Sergey", "Lena", "Ira"] },
+    { name: "Mango Tasty", friends: ["Zina", "Kristina", "Dima", "Sasha"] },
+    { name: "Dan Balan", friends: ["Igor", "Vova"] },
   ];
   // Пиши код ниже этой строки
 
   const getNamesSortedByFriendCount = () => {
-    return;
+    return users
+      .sort((a, b) => (a.friends.length < b.friends.length ? 1 : -1))
+      .map((v) => v.name);
   };
 
-  console.log('Task 28: ', getNamesSortedByFriendCount());
+  console.log("Task 28: ", getNamesSortedByFriendCount());
 }
 
 /* *** Task 29 *** */
@@ -86,25 +99,30 @@
 // Используйте reduce!
 {
   const users = [
-    { name: 'Ivan Best', age: 35, gender: 'male' },
-    { name: 'Thimothy First', age: 20, gender: 'male' },
-    { name: 'Mango Tasty', age: 16, gender: 'female' },
-    { name: 'Dan Balan', age: 18, gender: 'male' },
-    { name: 'Poly Third', age: 31, gender: 'female' },
-    { name: 'Lena Forest', age: 26, gender: 'female' },
-    { name: 'Cucumber Green', age: 42, gender: 'male' },
-    { name: 'Ann Last', age: 14, gender: 'female' },
+    { name: "Ivan Best", age: 35, gender: "male" },
+    { name: "Thimothy First", age: 20, gender: "male" },
+    { name: "Mango Tasty", age: 16, gender: "female" },
+    { name: "Dan Balan", age: 18, gender: "male" },
+    { name: "Poly Third", age: 31, gender: "female" },
+    { name: "Lena Forest", age: 26, gender: "female" },
+    { name: "Cucumber Green", age: 42, gender: "male" },
+    { name: "Ann Last", age: 14, gender: "female" },
   ];
   // Пиши код ниже этой строки
 
   // Пиши код ниже этой строки
-  const getAverageAgeByGender = () => {
-    return;
+  const getAverageAgeByGender = (users, gender) => {
+    const filtered = users.filter((user) => user.gender === gender);
+    const inturnal =
+      filtered.reduce((userAcc, curentUer) => userAcc + curentUer.age, 0) /
+      filtered.length;
+
+    return Math.round(inturnal);
   };
   // Пиши код выше этой строки
 
-  console.log('Task 29: ', getAverageAgeByGender(users, 'female')); // 22
-  console.log('Task 29: ', getAverageAgeByGender(users, 'male')); // 29
+  console.log("Task 29: ", getAverageAgeByGender(users, "female")); // 22
+  console.log("Task 29: ", getAverageAgeByGender(users, "male")); // 29
 }
 
 /* *** Task 30 *** */
@@ -117,24 +135,50 @@
 // Функция должна вернуть объект с полями total, maxIncome, maxExpense
 {
   const transactions = [
-    { id: 1, type: 'income', amount: 2000 },
-    { id: 2, type: 'expense', amount: 1500 },
-    { id: 3, type: 'expense', amount: 1200 },
-    { id: 4, type: 'expense', amount: 700 },
-    { id: 5, type: 'income', amount: 2400 },
-    { id: 6, type: 'expense', amount: 400 },
-    { id: 7, type: 'income', amount: 1000 },
-    { id: 8, type: 'expense', amount: 1700 },
-    { id: 9, type: 'expense', amount: 200 },
-    { id: 10, type: 'income', amount: 1900 },
+    { id: 1, type: "income", amount: 2000 },
+    { id: 2, type: "expense", amount: 1500 },
+    { id: 3, type: "expense", amount: 1200 },
+    { id: 4, type: "expense", amount: 700 },
+    { id: 5, type: "income", amount: 2400 },
+    { id: 6, type: "expense", amount: 400 },
+    { id: 7, type: "income", amount: 1000 },
+    { id: 8, type: "expense", amount: 1700 },
+    { id: 9, type: "expense", amount: 200 },
+    { id: 10, type: "income", amount: 1900 },
   ];
   // Пиши код ниже этой строки
 
   // Пиши код ниже этой строки
+  const getSummatry = (transactions) => {
+    return transactions.reduce(
+      (transactionsAcc, transactionCur) =>
+        transactionCur.type === "income"
+          ? transactionsAcc + transactionCur.amount
+          : transactionsAcc - transactionCur.amount,
+      0
+    );
+  };
+
+  const getMax = (transactions) => {
+    return Math.max(
+      ...transactions.map((item) => item.type === "income" && item.amount)
+    );
+  };
+
+  const getMin = (transactions) => {
+    return Math.max(
+      ...transactions.map((item) => item.type === "expense" && item.amount)
+    );
+  };
+
   const getTransactionsSummary = (transactions) => {
-    return;
+    return {
+      total: getSummatry(transactions),
+      maxIncome: getMax(transactions),
+      maxExpense: getMin(transactions),
+    };
   };
   // Пиши код выше этой строки
 
-  console.log('Task 30: ', getTransactionsSummary(transactions)); // { total: 1600, maxIncome: 2400, maxExpense: 1700 }
+  console.log("Task 30: ", getTransactionsSummary(transactions)); // { total: 1600, maxIncome: 2400, maxExpense: 1700 }
 }

@@ -28,10 +28,20 @@
     }
     return mySet;
   };
+
+  const getFriends2 = (users) => {
+    return users.reduce((accumulator, currentValue) => {
+      for (friend of currentValue.friends) {
+        accumulator.includes(friend) ? null : accumulator.push(friend);
+      }
+      return accumulator;
+    }, []);
+  };
   // Пиши код выше этой строки
 
   console.log("Task 13: ", getFriends(users)); // ['Vasya','Taras','Ilya','Kolya','Sasha','Oleg','Sergey','Lena','Ira','Zina',
   //  'Kristina','Dima','Igor','Vova']
+  console.log("Task 13: ", getFriends2(users));
 }
 
 /* *** Task 14 *** */
@@ -46,7 +56,9 @@
     { name: "Dan Balan", isActive: false },
   ];
   // Пиши код ниже этой строки
-  const getActiveUsers = () => {};
+  const getActiveUsers = (users) => {
+    return users.filter((user) => user.isActive);
+  };
 
   console.log("Task 14: ", getActiveUsers(users)); // [{ name: 'Ivan Best', isActive: true }, { name: 'Thimothy First', isActive: true }]
 }
@@ -75,10 +87,18 @@
   ];
   // Пиши код ниже этой строки
 
-  const getBookByTitle = () => {};
-  const getBookByAuthor = () => {};
-  const getBookByField = () => {};
-
+  const getBookByTitle = (title) => {
+    return books.filter((book) => book.title === title);
+  };
+  const getBookByAuthor = (Author) => {
+    return books.filter((book) => book.author === Author);
+  };
+  const getBookByField = (field, value) => {
+    if (books.some((book) => book[field])) {
+      return books.filter((book) => book[field] === value);
+    }
+    return null;
+  };
   console.log("Task 15: ", getBookByTitle("Заповіт")); // { title: 'Заповіт', author: 'Тарас Шевченко', rating: 8.35, pages: 280 }
   console.log("Task 15: ", getBookByAuthor("Ли Танит")); // { title: 'Красна как кровь', author: 'Ли Танит', rating: 7.94, pages: 300 }
   console.log("Task 15: ", getBookByField("rating", 8.51)); // { title: 'На берегу спокойных вод', author: 'Роберт Шекли', rating: 8.51, pages: 252 }
@@ -105,14 +125,14 @@
   ];
   // Пиши код ниже этой строки
 
-  const eachElementInFirstIsEven = undefined;
-  const eachElementInFirstIsOdd = undefined;
+  const eachElementInFirstIsEven = firstArray.every((item) => item % 2 === 0);
+  const eachElementInFirstIsOdd = firstArray.some((item) => item % 2 === 0);
 
-  const someElementInSecondIsEven = undefined;
-  const someElementInSecondIsOdd = undefined;
+  const someElementInSecondIsEven = secondArray.some((item) => item % 2 === 0);
+  const someElementInSecondIsOdd = secondArray.some((item) => item % 2 !== 0);
 
-  const allUsersAreOnline = undefined;
-  const someUsersAreOffline = undefined;
+  const allUsersAreOnline = users.every((user) => user.isOnline);
+  const someUsersAreOffline = users.some((user) => !user.isOnline);
 
   console.log("Task 16: ", eachElementInFirstIsEven);
   console.log("Task 16: ", eachElementInFirstIsOdd);
@@ -134,7 +154,9 @@
   const playtimes = Object.values(players); // [1270, 468, 710, 244]
   // Пиши код ниже этой строки
 
-  const totalPlayTime = undefined;
+  const totalPlayTime = playtimes.reduce(
+    (playtimesAcc, currentValue) => playtimesAcc + currentValue
+  );
 
   // Пиши код выше этой строки
   const averagePlayTime = totalPlayTime / playtimes.length;
@@ -154,7 +176,11 @@
   ];
   // Пиши код ниже этой строки
 
-  const totalAveragePlaytimePerGame = undefined;
+  const totalAveragePlaytimePerGame = players.reduce(
+    (playersAcc, currentValue) =>
+      playersAcc + currentValue.playtime / currentValue.gamesPlayed,
+    0
+  );
 
   console.log("Task 18: ", totalAveragePlaytimePerGame); // 1023
 }
@@ -171,8 +197,8 @@
   ];
   // Пиши код ниже этой строки
 
-  const calculateTotalBalance = () => {
-    return;
+  const calculateTotalBalance = (users) => {
+    return users.reduce((userAcc, user) => userAcc + user.balance, 0);
   };
 
   console.log("Task 19: ", calculateTotalBalance(users)); // 2161
@@ -190,10 +216,8 @@
   ];
   // Пиши код ниже этой строки
 
-  const getTotalFriendCount = () => {
-    return;
-  };
-
+  const getTotalFriendCount = (users) =>
+    users.reduce((userAcc, user) => userAcc + user.friends.length, 0);
   console.log("Task 20: ", getTotalFriendCount(users)); // 2161
 }
 
@@ -209,9 +233,9 @@
   ];
   // Пиши код ниже этой строки
 
-  const ascendingReleaseDates = undefined;
+  const ascendingReleaseDates = releaseDates.sort((a, b) => a - b);
 
-  const alphabeticalAuthors = undefined;
+  const alphabeticalAuthors = authors.sort();
 
   console.log("Task 21: ", ascendingReleaseDates, alphabeticalAuthors);
 }
@@ -228,9 +252,9 @@
   ];
   // Пиши код ниже этой строки
 
-  const descendingReleaseDates = undefined;
+  const descendingReleaseDates = releaseDates.sort((a, b) => b - a);
 
-  const reversedAlphabeticalAuthors = undefined;
+  const reversedAlphabeticalAuthors = authors.sort((a, b) => (a > b ? -1 : 1));
 
   console.log("Task 22: ", descendingReleaseDates, reversedAlphabeticalAuthors);
 }
@@ -256,13 +280,21 @@
   ];
   // Пиши код ниже этой строки
 
-  const sortedByAuthorName = undefined;
+  const sortedByAuthorName = books.sort((a, b) =>
+    a.author < b.author ? -1 : 1
+  );
 
-  const sortedByReversedAuthorName = undefined;
+  const sortedByReversedAuthorName = books.sort((a, b) =>
+    a.author > b.author ? -1 : 1
+  );
 
-  const sortedByAscendingRating = undefined;
+  const sortedByAscendingRating = books.sort((a, b) =>
+    a.rating < b.rating ? -1 : 1
+  );
 
-  const sortedByDescentingRating = undefined;
+  const sortedByDescentingRating = books.sort((a, b) =>
+    a.rating > b.rating ? -1 : 1
+  );
 
   console.log(
     "Task 23: ",
@@ -286,9 +318,8 @@
   ];
   // Пиши код ниже этой строки
 
-  const sortByAscendingBalance = () => {
-    return;
-  };
+  const sortByAscendingBalance = () =>
+    users.sort((a, b) => (a.balance < b.balance ? -1 : 1));
 
   console.log("Task 24: ", sortByAscendingBalance());
 }
