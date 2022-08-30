@@ -134,6 +134,27 @@ body {
   background-repeat: no-repeat;
 }
 
+.lightbox__button.previus {
+  position: relative;
+  align-self: center;
+  background-image: url('../images/icon-left.svg');
+  margin-right: 10px;
+}
+
+.lightbox__button.next {
+  position: relative;
+  align-self: center;
+  background-image: url('../images/icon-right.svg');
+  margin-left: 10px;
+}
+.lightbox__button.next:hover,
+.lightbox__button.next:focus,
+.lightbox__button.previus:hover,
+.lightbox__button.previus:focus {
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+
 .lightbox__button:hover,
 .lightbox__button:focus {
   background-color: rgba(0, 0, 0, 0.5);
