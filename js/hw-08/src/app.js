@@ -131,13 +131,28 @@ function openModal(galleryItem) {
   modal.classList.add("is-open");
   const elimage = modal.querySelector("img");
   elimage.src = galleryItem.closest(".gallery__link").href;
-  window.addEventListener("keydown", cloaseModal);
+  window.addEventListener("keydown", handleKeydown);
 }
 
-function cloaseModal(e) {
-  if (e.type === "keydown" && e.code !== "Escape") {
-    return;
+function handleKeydown(e) {
+  if (e.type === "keydown") {
+    switch (e.code) {
+      case "Escape":
+        cloaseModal();
+        break;
+      case "ArrowRight":
+        displyPrevImage();
+        break;
+      case "ArrowLeft":
+        displyNextImage();
+        break;
+      default:
+        return;
+    }
   }
+}
+
+function cloaseModal() {
   modal.querySelector(".lightbox__image").src = "";
   modal.classList.remove("is-open");
   window.removeEventListener("keydown", cloaseModal);
